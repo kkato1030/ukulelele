@@ -17,16 +17,17 @@ function err_exit () {
 
 ## Get Path
 PRJ_ROOT_PATH=$(dirname $(cd $(dirname $0); pwd))
+SRC_DIR="$(dirname $(cd $(dirname $0); pwd))/src"
 JSON_FILE=channel.json
-JSON_FULL_PATH="$PRJ_ROOT_PATH/$JSON_FILE"
+JSON_FILE_PATH="$SRC_DIR/$JSON_FILE"
 ## Check JSON File
-if [ ! -f $JSON_FULL_PATH ];then
+if [ ! -f $JSON_FILE_PATH ];then
   err_exit "$JSON_FILE can't be found."
 fi
 
 ## Get channel ARN
 ARN_REGEXP="arn:aws:ivs:$REGION:[0-9]{12}:channel/[[:alnum:]]{12}"
-channel_arn=$(egrep --only-matching $ARN_REGEXP < $JSON_FULL_PATH)
+channel_arn=$(egrep --only-matching $ARN_REGEXP < $JSON_FILE_PATH)
 ## Check ARN
 if [ $? = 1 ];then
   err_exit "The ARN of \"$CHANNEL_NAME\" can't be found in $JSON_FILE."
@@ -40,7 +41,7 @@ fi
 echo "[INFO] $CHANNEL_NAME is deleted."
 
 ## Delete Json file
-rm $JSON_FULL_PATH
+rm $JSON_FILE_PATH
 if [ $? = 1 ];then
   err_exit "Cannot delete $JSON_FILE."
 fi
