@@ -10,7 +10,9 @@
     "ivs:delete": "sh scripts/delete-channel.sh"
   },
   "dependencies": {
+    "amazon-ivs-player": "^1.0.0",
     "core-js": "^3.6.5",
+    "video.js": "^7.8.4",
     "vue": "^2.6.11"
   },
   "devDependencies": {

@@ -13,7 +13,9 @@ function ivs () {
 
 ## Get Path
 PRJ_ROOT_PATH=$(dirname $(cd $(dirname $0); pwd))
+SRC_DIR="$PRJ_ROOT_PATH/src"
 JSON_FILE=channel.json
+JSON_FILE_PATH="$SRC_DIR/$JSON_FILE"
 
 ## Confirm Channel Existence
 ARN_REGEXP="arn:aws:ivs:$REGION:[0-9]{12}:channel/[[:alnum:]]{12}"
@@ -36,6 +38,6 @@ if [ $line_count -gt 1 ];then
 fi
 
 ## Get and Save channel info
-ivs get-channel --arn $channel_arn > $PRJ_ROOT_PATH/$JSON_FILE
+ivs get-channel --arn $channel_arn > $JSON_FILE_PATH
 echo "[INFO] Get channel info \"$CHANNEL_NAME\" and Save to $JSON_FILE"
 exit 0

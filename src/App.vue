@@ -1,29 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <h1>Ukulelele</h1>
+    <video-player :options="videoOptions"></video-player>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import VideoPlayer from "@/components/VideoPlayer.vue";
+import channelConfig from "@/channel.json";
 
 export default Vue.extend({
   name: "App",
   components: {
-    HelloWorld
+    VideoPlayer
+  },
+  data() {
+    return {
+      videoOptions: {
+        autoplay: true,
+        controls: true,
+        fluid: true,
+        responsive: true,
+        liveui: true,
+        sources: [
+          {
+            src: channelConfig.channel.playbackUrl,
+            type: "application/x-mpegURL"
+          }
+        ]
+      }
+    };
   }
 });
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss"></style>
